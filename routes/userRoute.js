@@ -1,0 +1,11 @@
+const express = require("express");
+// const { Logout } = require("../controllers/logout.routes");
+const router = express.Router();
+const { createUser, connectUser } = require("../controllers/userControllers");
+const { authenticateToken } = require("../authJWT");
+
+router.post("/login", connectUser);
+// router.post("/logout", Logout)
+router.post("/inscription", createUser)
+router.use(authenticateToken);
+module.exports = router;
