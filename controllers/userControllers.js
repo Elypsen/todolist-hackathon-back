@@ -1,4 +1,4 @@
-const User = require("../models/user.model");
+const User = require("../models/user");
 const argon2 = require("argon2");
 const { generateAccessToken } = require("../authJWT");
 
@@ -9,9 +9,9 @@ async function createUser(req, res) {
     console.log(user)
     await user.validate();
     try {
-        const hash = await argon2.hash(user.pwd);
+        const hash = await argon2.hash(user.password);
         console.log(hash)
-        user.pwd = hash;
+        user.password = hash;
         await User.create(user);
         res.status(201).json(user);
     } catch (err) {
@@ -21,12 +21,12 @@ async function createUser(req, res) {
 
 async function connectUser(req, res) {
     let user;
-    let username = req.body.user_name;
+    let username = req.body.username;
     try {
-        user = await User.findOne({ user_name: username });
+        user = await User.findOne({ username: username });
         try {
-            if (await argon2.verify(user.pwd, req.body.pwd)) {
-                const token = generateAccessToken(user.user_name);
+            if (await argon2.verify(user.password, req.body.password)) {
+                const token = generateAccessToken(user.username);
                 res.status(200).json(token);
             } else {
                 res.status(400).json({ message: "Mauvais mot de passe ! " });

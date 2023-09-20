@@ -11,13 +11,13 @@ const userSchema = Schema({
     },
 
     password: String,
-    userTask: {
-        type: String,
-        unique: true
+    task: {
+        type: [String]
+        
     },
 
 })
 
-const Task = mongoose.model('Task', tasksSchema);
+const User = mongoose.model('user', userSchema);
 
-module.exports = Task;
+module.exports = User;

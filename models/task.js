@@ -12,15 +12,15 @@ const taskSchema = Schema({
 
     isDone: {
         type: Boolean,
-        unique: true
+       
     },
-    userTask: {
+    id_User: {
         type: String,
-        unique: true
+        
     },
 
 })
 
-const Task = mongoose.model('Task', tasksSchema);
+const Task = mongoose.model('Task', taskSchema);
 
 module.exports = Task;
