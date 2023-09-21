@@ -30,7 +30,7 @@ async function getTasksComplted(req, res) {
       res.status(404).json({ message: "getTasks : " + err.message });
     }
   }
-
+  
   async function deleteTask(req, res) {
     const {_id } = req.params;
 try {

@@ -18,7 +18,6 @@ const outputFile = './swagger_output.json'
 const swaggerDocument = require('./swagger_output.json');
 app.use('/docs',swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
-
 const userRouter= require('./routes/userRoutes')
 const routerTask=require("./routes/taskRoutes")
 app.use(cors());
