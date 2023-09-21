@@ -1,0 +1,3 @@
+ MONGO_URL="""""""""""""""""" # il faut mette ta propre URL ou 
+   SECRET="""""""""""""""""""""""" # ton code _secret
+ 

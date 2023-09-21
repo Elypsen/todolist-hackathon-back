@@ -1,25 +1,31 @@
 const express = require('express');
-var cors = require('cors');
+const connectDB = require("./config/bd");
+// const session = require('express-session');
 require("dotenv").config();
+var cors = require('cors');
 const bodyParser = require('body-parser');
-
- const connectDB = require("./config/bd");
- const app = express();
- connectDB()
-
-const swaggerUi = require('swagger-ui-express');
-// const swaggerDocument = require('./swagger_output.json'); il faut  le décommenter une fois on a les router
-const swaggerAutogen = require('swagger-autogen');
- app.use(express.json());
-
-const outputFile = './swagger_output.json'
+// connexion à la DB
+connectDB();
+const app = express();
 
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+const swaggerUi = require('swagger-ui-express');
+const swaggerAutogen = require('swagger-autogen');
+
+const outputFile = './swagger_output.json'
+ swaggerAutogen(outputFile, ['./routes/userRoutes','./routes/taskRoutes'])//
+const swaggerDocument = require('./swagger_output.json');
+app.use('/docs',swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
+const userRouter= require('./routes/userRoutes')
+const routerTask=require("./routes/taskRoutes")
 app.use(cors());
-swaggerAutogen(outputFile, []) // rajouter les routers dès qu'ils existes
-//app.use('/docs',swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
+app.use("/task", routerTask);
+app.use("/", userRouter)
 
 app.listen(8000, () => {
     console.log(`Le serveur est en écoute sur le port 8000`);
 });
+
