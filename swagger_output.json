@@ -11,9 +11,154 @@
     "http"
   ],
   "paths": {
+    "/task/addTask": {
+      "post": {
+        "tags": [
+          "tasks"
+        ],
+        "summary": "Create a new task",
+        "description": "Endpoint to create a new task.",
+        "responses": {
+          "200": {
+            "description": "Create a new task with title- content- isDone end username"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/task/displayList/{id_User}": {
+      "post": {
+        "tags": [
+          "tasks"
+        ],
+        "summary": "Get all tasks",
+        "description": "Endpoint to get all tasks.",
+        "parameters": [
+          {
+            "name": "id_User",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Tasks found."
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/task/displayListCompleted/{id_User}": {
+      "post": {
+        "tags": [
+          "tasks"
+        ],
+        "summary": "Get all tasks completed",
+        "description": "Endpoint to get all tasks completed.",
+        "parameters": [
+          {
+            "name": "id_User",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Tasks completed found."
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/task/updateCompleted/{_id}": {
+      "put": {
+        "tags": [
+          "tasks"
+        ],
+        "summary": "update task",
+        "description": "Endpoint to update task.",
+        "parameters": [
+          {
+            "name": "_id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "newCompletedValue": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Task tasked"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/task/deleteTask/{_id}": {
+      "delete": {
+        "tags": [
+          "tasks"
+        ],
+        "summary": "delete task",
+        "description": "Endpoint to delete task.",
+        "parameters": [
+          {
+            "name": "_id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "delete task"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
     "/signUp": {
       "post": {
-        "description": "",
+        "tags": [
+          "users"
+        ],
+        "summary": "Create a new user",
+        "description": "Endpoint to create a new user.",
+        "parameters": [
+          {
+            "name": "user",
+            "description": "User object",
+            "required": true,
+            "type": "object",
+            "in": "query"
+          }
+        ],
         "responses": {
           "201": {
             "description": "Created"
@@ -26,7 +171,11 @@
     },
     "/login": {
       "post": {
-        "description": "",
+        "tags": [
+          "Security"
+        ],
+        "summary": "Get authentication token",
+        "description": "Endpoint to authenticate a user and return a JWT token",
         "parameters": [
           {
             "name": "body",
@@ -53,118 +202,6 @@
           },
           "404": {
             "description": "Not Found"
-          }
-        }
-      }
-    },
-    "/addTask": {
-      "post": {
-        "description": "",
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "404": {
-            "description": "Not Found"
-          }
-        }
-      }
-    },
-    "/displayList/{id_User}": {
-      "post": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "id_User",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "404": {
-            "description": "Not Found"
-          }
-        }
-      }
-    },
-    "/displayListCompleted/{id_User}": {
-      "post": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "id_User",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "404": {
-            "description": "Not Found"
-          }
-        }
-      }
-    },
-    "/updateCompleted/{_id}": {
-      "put": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "_id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "newCompletedValue": {
-                  "example": "any"
-                }
-              }
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "404": {
-            "description": "Not Found"
-          }
-        }
-      }
-    },
-    "/deleteTask/{_id}": {
-      "delete": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "_id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "500": {
-            "description": "Internal Server Error"
           }
         }
       }
