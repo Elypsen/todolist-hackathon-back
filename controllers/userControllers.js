@@ -5,6 +5,10 @@ const { generateAccessToken } = require("../authJWT");
 
 
 async function createUser(req, res) {
+    // #swagger.tags = ['users']
+      // #swagger.description = 'Endpoint to create a new user.'
+      // #swagger.summary = 'Create a new user'
+      // #swagger.parameters['user'] = { description: 'User object', required: true, type: 'object'}
     const user = new User(req.body);
     console.log(user)
     await user.validate();
@@ -20,6 +24,10 @@ async function createUser(req, res) {
 }
 
 async function connectUser(req, res) {
+    // #swagger.tags = ['Security']
+    // #swagger.summary = 'Get authentication token'
+    // #swagger.description = 'Endpoint to authenticate a user and return a JWT token'
+    
     let user;
     let username = req.body.username;
     try {

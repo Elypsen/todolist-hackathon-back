@@ -3,7 +3,8 @@ const SECRET = process.env.SECRET;
 const jwt = require("jsonwebtoken");
 
 function generateAccessToken(pseudo) {
-    return jwt.sign({ pseudo: pseudo }, SECRET, { expiresIn: "1d" });
+    return jwt.sign({ pseudo: pseudo }, SECRET, { expiresIn: "1d" }); 
+    
 }
 
 function authenticateToken(req, res, next) {

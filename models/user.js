@@ -13,7 +13,6 @@ const userSchema = Schema({
     password: String,
     task: {
         type: [String]
-        
     },
 
 })
